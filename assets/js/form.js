@@ -7,7 +7,8 @@ const submitButtonEl = $("#project-form");
 submitButtonEl.on("submit", function(event)
 {
     event.preventDefault(); // Default behavior is to reload page
-    alert(collectProjectFormData());
+    var newProject = collectProjectFormData();
+    printProjectDataToTable(newProject, $("<table>"));
 });
 
 /**
@@ -22,4 +23,17 @@ function collectProjectFormData()
     projectData.wage = hourlyWageEl.val();
     projectData.dueDate = dueDateEl.val();
     return projectData;
+}
+
+/**
+ * Adds a project to a given table element
+ * @param {*} project The project element to add to the table
+ * @param {*} table The table element that received the project
+ */
+function printProjectDataToTable(project, table)
+{
+    var cell = $("<td>");
+    cell.text(project.name);
+    table.append(cell);
+    alert(table.html());
 }
