@@ -8,7 +8,7 @@ submitButtonEl.on("submit", function(event)
 {
     event.preventDefault(); // Default behavior is to reload page
     var newProject = collectProjectFormData();
-    printProjectDataToTable(newProject, $("<table>"));
+    //printProjectDataToTable(newProject, $("<tr>")); // Example usage
 });
 
 /**
@@ -26,38 +26,36 @@ function collectProjectFormData()
 }
 
 /**
- * Adds a project to a given table element
+ * Adds a project to a given table row element
  * @param {*} project The project element to add to the table
- * @param {*} table The table element that received the project
+ * @param {*} tableRow The row of the table element to receive the project
  */
-function printProjectDataToTable(project, table)
+function printProjectDataToTable(project, tableRow)
 {
     var cell = $("<td>");
     cell.text(project.name);
-    table.append(cell);
+    tableRow.append(cell);
 
     cell = $("<td>");
     cell.text(project.type);
-    table.append(cell);
+    tableRow.append(cell);
 
     cell = $("<td>");
     cell.text(project.wage);
-    table.append(cell);
+    tableRow.append(cell);
 
     cell = $("<td>");
     cell.text(project.dueDate);
-    table.append(cell);
+    tableRow.append(cell);
 
     cell = $("<td>");
     var daysUntilDue = moment(project.dueDate, "MM DD YYYY").diff(moment(), "days", true);
     daysUntilDue = Math.ceil(daysUntilDue);
     cell.text(daysUntilDue + " day(s)"); // Days until due
-    table.append(cell);
+    tableRow.append(cell);
 
     cell = $("<td>");
     var totalEarned = project.wage * daysUntilDue * 8;
     cell.text(totalEarned); // Estimated total earned
-    table.append(cell);
-
-    alert(table.html());
+    tableRow.append(cell);
 }
