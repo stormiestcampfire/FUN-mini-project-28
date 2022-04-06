@@ -35,5 +35,29 @@ function printProjectDataToTable(project, table)
     var cell = $("<td>");
     cell.text(project.name);
     table.append(cell);
+
+    cell = $("<td>");
+    cell.text(project.type);
+    table.append(cell);
+
+    cell = $("<td>");
+    cell.text(project.wage);
+    table.append(cell);
+
+    cell = $("<td>");
+    cell.text(project.dueDate);
+    table.append(cell);
+
+    cell = $("<td>");
+    var daysUntilDue = moment(project.dueDate, "MM DD YYYY").diff(moment(), "days", true);
+    daysUntilDue = Math.ceil(daysUntilDue);
+    cell.text(daysUntilDue + " day(s)"); // Days until due
+    table.append(cell);
+
+    cell = $("<td>");
+    var totalEarned = project.wage * daysUntilDue * 8;
+    cell.text(totalEarned); // Estimated total earned
+    table.append(cell);
+
     alert(table.html());
 }
